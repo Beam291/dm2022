@@ -20,13 +20,32 @@ reviewDF = pd.DataFrame(data)
 #close the review_file
 reviewFile.close()
 
+#count word function 
+def word_count(str : str):
+    counts = dict()
+    words = str.split() #Break by space
+
+    for word in words:
+        if word in counts:
+            counts[word] += 1
+        else:
+            counts[word] = 1
+    return counts
+
+#preprcoessing function 
 def preprocessing(reviewDataFrame : pd.DataFrame):
+  reviewCombie = ""
+  
+  #Combie the review data
   for r in range(reviewDataFrame.shape[0]):
     reviewText = reviewDataFrame.iloc[r]['text']
     reviewText : str
+    reviewCombie+=reviewText
     
-    
-    
+  reviewCombie = reviewCombie.translate(str.maketrans('', '', string.punctuation)) #remove punctuation
+  reviewCombie = reviewCombie.lower() #Lowercase
+    # print(word_count(reviewText)) #count word 
+  print(reviewCombie)
 preprocessing(reviewDF)
 # #Dealing with the first line review of the json file
 # #first data
