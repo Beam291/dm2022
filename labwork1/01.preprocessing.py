@@ -44,8 +44,11 @@ def preprocessing(reviewDataFrame : pd.DataFrame):
     
   reviewCombie = reviewCombie.translate(str.maketrans('', '', string.punctuation)) #remove punctuation
   reviewCombie = reviewCombie.lower() #Lowercase
-    # print(word_count(reviewText)) #count word 
-  print(reviewCombie)
+  
+  reviewDict = word_count(reviewCombie) #count word 
+  
+  reviewListKey = list(reviewDict.keys())
+  
 preprocessing(reviewDF)
 # #Dealing with the first line review of the json file
 # #first data
