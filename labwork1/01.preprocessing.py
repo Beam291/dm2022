@@ -47,8 +47,14 @@ def preprocessing(reviewDataFrame : pd.DataFrame):
   
   reviewDict = word_count(reviewCombie) #count word 
   
-  reviewListKey = list(reviewDict.keys())
+  stopWords = set(stopwords.words('english'))
+
+  for i in list(reviewDict.keys()):
+    if i in stopWords:
+      del reviewDict[i]
   
+  print(reviewDict)
+    
 preprocessing(reviewDF)
 # #Dealing with the first line review of the json file
 # #first data
