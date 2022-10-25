@@ -1,5 +1,6 @@
 import itertools
 import json
+import math
 import pandas as pd
 import string
 from nltk.corpus import stopwords
@@ -37,6 +38,21 @@ def calculateDF(keyWord : str, reviewDict : dict):
   resultDF = reviewDict[keyWord]/3
   return resultDF
 
+#TF
+def calculateTF(keyWord : str, reviewDict : dict):
+  resultTF = reviewDict[keyWord] / len(reviewDict)
+  return resultTF
+  
+#IDF
+def calculateIDF(resultDF : float):
+  resultIDF = math.log(1/resultDF)
+  return resultIDF
+
+#Sorted by TF * IDF
+def sorted_TF_IDF(resultTF : float, resultIDF : float):
+  resultSorted = resultTF * resultIDF
+  return resultSorted
+
 #preprcoessing function 
 def preprocessing(reviewDataFrame : pd.DataFrame):
   reviewCombie = ""
@@ -55,10 +71,13 @@ def preprocessing(reviewDataFrame : pd.DataFrame):
   stopWords = set(stopwords.words('english'))
   
   for i in list(reviewDict.keys()):
-    if i in stopWords:
+    if i in stopWords: #remove stopwords
       del reviewDict[i]
       continue
-    
     resultDF = calculateDF(i, reviewDict) #calculate DF
+    resultTF = calculateTF(i, reviewDict)
+    resultIDF = calculateIDF(resultDF)
+    resultSorted = sorted_TF_IDF(resultTF, resultIDF)
+    print(resultSorted)
   
 preprocessing(reviewDF)
