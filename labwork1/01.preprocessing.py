@@ -28,5 +28,3 @@ reviewText1 = reviewText1.translate(str.maketrans('', '', string.punctuation))
 
 #Lowercase
 reviewText1 = reviewText1.lower()
-
-print(reviewText1)
