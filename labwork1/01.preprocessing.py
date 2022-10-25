@@ -20,28 +20,37 @@ reviewDF = pd.DataFrame(data)
 #close the review_file
 reviewFile.close()
 
-#Dealing with the first line review of the json file
-#first data
-reviewText1 = reviewDF.iloc[0]['text']
-reviewText1 : str #define reviewText1 is string (Pylance <- -_-)
+def preprocessing(reviewDataFrame : pd.DataFrame):
+  for r in range(reviewDataFrame.shape[0]):
+    reviewText = reviewDataFrame.iloc[r]['text']
+    reviewText : str
+    
+    
+    
+preprocessing(reviewDF)
+# #Dealing with the first line review of the json file
+# #first data
+# reviewText1 = reviewDF.iloc[0]['text']
+# reviewText1 : str #define reviewText1 is string (Pylance <- -_-)
 
-#remove punctuation
-reviewText1 = reviewText1.translate(str.maketrans('', '', string.punctuation))
+# #remove punctuation
+# reviewText1 = reviewText1.translate(str.maketrans('', '', string.punctuation))
 
-#Lowercase
-reviewText1 = reviewText1.lower()
+# #Lowercase
+# reviewText1 = reviewText1.lower()
 
-stop_words = set(stopwords.words('english'))
+# stop_words = set(stopwords.words('english'))
 
-reviewText1 = reviewText1.split()
+# reviewText1 = reviewText1.split()
 
-filtered_sentence = []
+# filtered_sentence = []
 
-for r in reviewText1: 
-    if r not in stop_words:
-      filtered_sentence.append(r)
+# for r in reviewText1: 
+#     if r not in stop_words:
+#       filtered_sentence.append(r)
       
-print(filtered_sentence)
+# print(filtered_sentence)
+
 # #count word
 # def word_count(str : str):
 #     counts = dict()
