@@ -2,6 +2,7 @@ import itertools
 import json
 import pandas as pd
 import string
+from nltk.corpus import stopwords
 
 #open review file
 reviewFile = open("../../dataset/Yelp/yelp_academic_dataset_review.json")
@@ -22,9 +23,35 @@ reviewFile.close()
 #Dealing with the first line review of the json file
 #first data
 reviewText1 = reviewDF.iloc[0]['text']
+reviewText1 : str #define reviewText1 is string (Pylance <- -_-)
 
 #remove punctuation
 reviewText1 = reviewText1.translate(str.maketrans('', '', string.punctuation))
 
 #Lowercase
 reviewText1 = reviewText1.lower()
+
+stop_words = set(stopwords.words('english'))
+
+reviewText1 = reviewText1.split()
+
+filtered_sentence = []
+
+for r in reviewText1: 
+    if r not in stop_words:
+      filtered_sentence.append(r)
+      
+print(filtered_sentence)
+# #count word
+# def word_count(str : str):
+#     counts = dict()
+#     words = str.split() #Break by space
+
+#     for word in words:
+#         if word in counts:
+#             counts[word] += 1
+#         else:
+#             counts[word] = 1
+#     return counts
+
+# print(word_count(reviewText1))
