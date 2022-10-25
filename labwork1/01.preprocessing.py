@@ -44,13 +44,13 @@ def calculateTF(keyWord : str, reviewDict : dict):
   return resultTF
   
 #IDF
-def calculateIDF(resultDF : float):
-  resultIDF = math.log(1/resultDF)
+def calculateIDF(keyWord : str, reviewDict : dict):
+  resultIDF = math.log(1/ calculateDF(keyWord, reviewDict))
   return resultIDF
 
-#Sorted by TF * IDF
-def sorted_TF_IDF(resultTF : float, resultIDF : float):
-  resultSorted = resultTF * resultIDF
+#Sorted by TF - IDF
+def sorted_TF_IDF(keyWord : str, reviewDict : dict):
+  resultSorted = calculateTF(keyWord, reviewDict) * calculateIDF(keyWord, reviewDict)
   return resultSorted
 
 #preprcoessing function 
@@ -74,10 +74,7 @@ def preprocessing(reviewDataFrame : pd.DataFrame):
     if i in stopWords: #remove stopwords
       del reviewDict[i]
       continue
-    resultDF = calculateDF(i, reviewDict) #calculate DF
-    resultTF = calculateTF(i, reviewDict)
-    resultIDF = calculateIDF(resultDF)
-    resultSorted = sorted_TF_IDF(resultTF, resultIDF)
+    resultSorted = sorted_TF_IDF(i, reviewDict)
     print(resultSorted)
   
 preprocessing(reviewDF)
