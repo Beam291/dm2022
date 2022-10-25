@@ -31,6 +31,11 @@ def word_count(str : str):
         else:
             counts[word] = 1
     return counts
+  
+#DF
+def calculateDF(keyWord : str, reviewDict : dict):
+  resultDF = reviewDict[keyWord]/3
+  return resultDF
 
 #preprcoessing function 
 def preprocessing(reviewDataFrame : pd.DataFrame):
@@ -48,11 +53,12 @@ def preprocessing(reviewDataFrame : pd.DataFrame):
   reviewDict = word_count(reviewCombie) #count word 
   
   stopWords = set(stopwords.words('english'))
-
+  
   for i in list(reviewDict.keys()):
     if i in stopWords:
       del reviewDict[i]
-  
-  print(reviewDict)
+      continue
     
+    resultDF = calculateDF(i, reviewDict) #calculate DF
+  
 preprocessing(reviewDF)
