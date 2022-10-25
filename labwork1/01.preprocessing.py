@@ -1,3 +1,6 @@
+#Name: Le Nguyen Khoi
+#StudentID: M21.ICT.005
+
 import itertools
 import json
 import pandas as pd
