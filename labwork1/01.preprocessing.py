@@ -17,3 +17,6 @@ review_df = pd.DataFrame(data)
 
 #close the review_file
 review_file.close()
+
+#first data
+data1 = review_df.iloc[0]['text']
