@@ -6,8 +6,8 @@ import json
 reviewFile = open("../dataset/Yelp/yelp_academic_dataset_review.json")
 data = []
 
-#Because json file too heavy so only read 10000 first lines
-for line in itertools.islice(reviewFile,10000):
+#Because json file too heavy so only read 1000 first lines
+for line in itertools.islice(reviewFile,100):
   line = line.strip()
   if not line: continue
   data.append(json.loads(line))
@@ -28,5 +28,19 @@ for r in range(nbRow):
     length = len(reviewDF.iloc[r]['text'])
     reviewLength.append(length)
 
-# for i in reviewLength:
+distDict = {}
+for i in reviewLength:
+    dist = []
+    for k in reviewLength:
+        dist2point = abs(k - i)
+        dist.append(dist2point)
+          
     
+#     for m in range(nbRow):
+#         for n in range(nbRow): 
+#             for x in dist:
+#                 reviewMatrix[m][n] = x
+
+# print(reviewMatrix)
+            
+# print(reviewMatrix)
