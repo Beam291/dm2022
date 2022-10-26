@@ -6,7 +6,7 @@ import json
 reviewFile = open("../dataset/Yelp/yelp_academic_dataset_review.json")
 data = []
 
-#Because json file too heavy so only read 1000 first lines
+#Because json file too heavy so only read 100 first lines
 for line in itertools.islice(reviewFile,100):
   line = line.strip()
   if not line: continue
@@ -15,9 +15,6 @@ for line in itertools.islice(reviewFile,100):
 #DataFrame of review_file
 reviewDF = pd.DataFrame(data)
 nbRow = reviewDF.shape[0] #number of Row
-
-#Create matrix
-reviewMatrix = [[0 for x in range(nbRow)] for y in range(nbRow)]
 
 #close the review_file
 reviewFile.close()
@@ -34,13 +31,6 @@ for i in reviewLength:
     for k in reviewLength:
         dist2point = abs(k - i)
         dist.append(dist2point)
-          
+    indexReviewLength = reviewLength.index(i)
+    distDict[indexReviewLength] = dist
     
-#     for m in range(nbRow):
-#         for n in range(nbRow): 
-#             for x in dist:
-#                 reviewMatrix[m][n] = x
-
-# print(reviewMatrix)
-            
-# print(reviewMatrix)
