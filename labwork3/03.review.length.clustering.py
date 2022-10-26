@@ -33,4 +33,4 @@ for i in reviewLength:
         dist.append(dist2point)
     indexReviewLength = reviewLength.index(i)
     distDict[indexReviewLength] = dist
-    
+
