@@ -14,13 +14,19 @@ for line in itertools.islice(reviewFile,10000):
   
 #DataFrame of review_file
 reviewDF = pd.DataFrame(data)
+nbRow = reviewDF.shape[0] #number of Row
+
+#Create matrix
+reviewMatrix = [[0 for x in range(nbRow)] for y in range(nbRow)]
 
 #close the review_file
 reviewFile.close()
 
 #count words in each review
 reviewLength = []
-for r in range(reviewDF.shape[0]):
+for r in range(nbRow):
     length = len(reviewDF.iloc[r]['text'])
     reviewLength.append(length)
+
+# for i in reviewLength:
     
