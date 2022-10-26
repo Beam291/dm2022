@@ -6,7 +6,7 @@ import string
 from nltk.corpus import stopwords
 
 #open review file
-reviewFile = open("../../dataset/Yelp/yelp_academic_dataset_review.json")
+reviewFile = open("../dataset/Yelp/yelp_academic_dataset_review.json")
 data = []
 
 #Because json file too heavy so only read 3 first lines
