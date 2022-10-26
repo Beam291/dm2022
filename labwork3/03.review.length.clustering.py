@@ -26,11 +26,11 @@ for r in range(nbRow):
     reviewLength.append(length)
 
 distDict = {}
-for i in reviewLength:
+for i in range(len(reviewLength)):
     dist = []
     for k in reviewLength:
-        dist2point = abs(k - i)
+        dist2point = abs(k - reviewLength[i])
         dist.append(dist2point)
-    indexReviewLength = reviewLength.index(i)
-    distDict[indexReviewLength] = dist
+    distDict[i] = dist
 
+    
