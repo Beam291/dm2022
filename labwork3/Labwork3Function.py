@@ -58,11 +58,21 @@ def reviewMinimum(reviewMatrix : dict):
         reviewMinimumDict[key] = minDict
     return reviewMinimumDict
 
-
 #Calculate centroid of two point
 def calCentroid(value):
     return{value/2}
 
+#Merge cluster
+def mergeCluster(reviewMinimumDict : dict):
+    for key, value in reviewMinimumDict.items():
+        value : dict
+        st = {}
+        for k, v in value.items():
+            if k == key:
+                st[k] == key
+        print(st)
+            
+                
 # def commonElements(list1, list2):
 #     result = []
 #     for element in list1:
