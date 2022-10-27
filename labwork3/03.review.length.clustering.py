@@ -1,24 +1,10 @@
 import pandas as pd
-import itertools
-import json
+import Labwork3Function as func
 
-#open review file
-reviewFile = open("../dataset/Yelp/yelp_academic_dataset_review.json")
-data = []
-
-#Because json file too heavy so only read 100 first lines
-for line in itertools.islice(reviewFile,100):
-  line = line.strip()
-  if not line: continue
-  data.append(json.loads(line))
-  
-#DataFrame of review_file
-reviewDF = pd.DataFrame(data)
+reviewDF = func.readFile(100)
 nbRow = reviewDF.shape[0] #number of Row
-# reviewMatrix = Matrix = [[0 for x in range(nbRow)] for y in range(nbRow)] 
 
-#close the review_file
-reviewFile.close()
+# reviewMatrix = Matrix = [[0 for x in range(nbRow)] for y in range(nbRow)] 
 
 #count words in each review
 reviewLength = []
