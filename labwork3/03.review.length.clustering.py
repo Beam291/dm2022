@@ -1,10 +1,7 @@
-import pandas as pd
 import Labwork3Function as func
 
 reviewDF = func.readFile(100)
 nbRow = reviewDF.shape[0] #number of Row
-
-# reviewMatrix = Matrix = [[0 for x in range(nbRow)] for y in range(nbRow)] 
 
 #count words in each review
 reviewLength = []
@@ -20,7 +17,10 @@ for i in range(len(reviewLength)):
         dist.append(dist2point)
     distDict[i] = dist
 
-# for m in range(nbRow):
-#     for n in range(nbRow):
-#         listDist = distDict[m]
-#         reviewMatrix[m][n] = listDist[n]
+distDict1 = {}
+#find min
+for key, value in distDict.items():
+    list1 = value
+    list2 = value
+    print(func.commonElements(list1, list2))        
+        

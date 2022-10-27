@@ -20,3 +20,14 @@ def readFile(nbComment : int):
     
     return reviewDF
 
+#Calculate center of two point
+def calCenter(value):
+    return{value/2}
+
+def commonElements(list1, list2):
+    result = []
+    for element in list1:
+        if element in list2:
+            result.append(element)
+    result = [i for i in result if i != 0]
+    return result
