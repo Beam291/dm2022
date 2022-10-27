@@ -15,7 +15,7 @@ for line in itertools.islice(reviewFile,100):
 #DataFrame of review_file
 reviewDF = pd.DataFrame(data)
 nbRow = reviewDF.shape[0] #number of Row
-reviewMatrix = Matrix = [[0 for x in range(nbRow)] for y in range(nbRow)] 
+# reviewMatrix = Matrix = [[0 for x in range(nbRow)] for y in range(nbRow)] 
 
 #close the review_file
 reviewFile.close()
@@ -34,7 +34,7 @@ for i in range(len(reviewLength)):
         dist.append(dist2point)
     distDict[i] = dist
 
-for m in range(nbRow):
-    for n in range(nbRow):
-        listDist = distDict[m]
-        reviewMatrix[m][n] = listDist[n]
+# for m in range(nbRow):
+#     for n in range(nbRow):
+#         listDist = distDict[m]
+#         reviewMatrix[m][n] = listDist[n]
