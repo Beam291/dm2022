@@ -28,7 +28,7 @@ def reviewLength(reviewDF : pd.DataFrame):
         reviewLength.append(length)
     return reviewLength
 
-
+#create matrix
 def reviewMatrix(reviewLength : list): 
     distDict = {}
     for i in reviewLength:
@@ -47,11 +47,21 @@ def reviewMatrix(reviewLength : list):
         distDict[key] = cluster
     return distDict
         
-        
+#Find minimum
+def reviewMinimum(reviewMatrix : dict):
+    reviewMinimumDict = {}
+    for key, value in reviewMatrix.items():
+        value : dict
+        minDict = {}
+        lowest = min(value, key = value.get)
+        minDict[lowest] = value[lowest]
+        reviewMinimumDict[key] = minDict
+    return reviewMinimumDict
+
+
 #Calculate centroid of two point
 def calCentroid(value):
     return{value/2}
-
 
 # def commonElements(list1, list2):
 #     result = []
