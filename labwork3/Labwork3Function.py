@@ -20,14 +20,43 @@ def readFile(nbComment : int):
     
     return reviewDF
 
-#Calculate center of two point
-def calCenter(value):
+#Find review length
+def reviewLength(reviewDF : pd.DataFrame):
+    reviewLength = []
+    for r in range(reviewDF.shape[0]):
+        length = len(reviewDF.iloc[r]['text'])
+        reviewLength.append(length)
+    return reviewLength
+
+
+def reviewMatrix(reviewLength : list): 
+    distDict = {}
+    for i in reviewLength:
+        distList = []
+        for k in reviewLength:
+            dist2point = abs(k - i)
+            distList.append(dist2point)
+        distDict[reviewLength.index(i)] = distList
+    
+    for key, value in distDict.items():     
+        value : list
+        cluster = {}
+        for v in value:
+            cluster[value.index(v)] = v
+        cluster = {x:y for x,y in cluster.items() if y!=0}
+        distDict[key] = cluster
+    return distDict
+        
+        
+#Calculate centroid of two point
+def calCentroid(value):
     return{value/2}
 
-def commonElements(list1, list2):
-    result = []
-    for element in list1:
-        if element in list2:
-            result.append(element)
-    result = [i for i in result if i != 0]
-    return result
+
+# def commonElements(list1, list2):
+#     result = []
+#     for element in list1:
+#         if element in list2:
+#             result.append(element)
+#     result = [i for i in result if i != 0]
+#     return result
