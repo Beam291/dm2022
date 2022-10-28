@@ -52,13 +52,14 @@ def findMinDist(reviewMatrix : dict):
             
 #Merging Point
 def pointMerge(minDist : dict, reviewMatrix : dict):
+    pointMerge = []
     for key, value in reviewMatrix.items():
         value : dict
         for k, v in value.items():
             for km, vm in minDist.items():
                 if v == vm and km == key:
-                    print(k, key)
-                    return k, key 
+                    pointMerge.append([key, k])
+    return pointMerge
 
 #Merging (not my idea)
 # def merging(reviewMatrix : dict, minDist : dict):
@@ -68,10 +69,7 @@ def pointMerge(minDist : dict, reviewMatrix : dict):
 reviewDF = readFile(10)
 reviewMatrix = matrixGenerator(reviewDF)
 minDist = findMinDist(reviewMatrix)
-for i in range(10):
-    
-    pointMerge(minDist , reviewMatrix)
-# merging(minDist, reviewMatrix)
+print(pointMerge(minDist, reviewMatrix))
 
 # print(reviewMatrix)
 
