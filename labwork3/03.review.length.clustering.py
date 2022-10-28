@@ -1,4 +1,5 @@
 import itertools
+from traceback import print_tb
 import pandas as pd
 import json
 
@@ -39,14 +40,30 @@ def matrixGenerator(reviewLength : dict):
         distMatrix[key] = dist
     return distMatrix
 
-def clusterMerge(reviewMatrix : dict):
+#Find the min distant
+def findMinDist(reviewMatrix : dict):
+    minDist = {}
     for key, value in reviewMatrix.items():
+        tempData = {}
         lowest = min(value, key = value.get)
-        print(lowest, value[lowest])
+        tempData[lowest] = value[lowest]
+        minDist[key] = tempData
+    return minDist
             
-
+def clusterMerge(minDist : dict):
+    temp = list(minDist.keys())
+    
+            
 #Program start from here
 reviewDF = readFile(10)
 reviewLength = countLength(reviewDF)
 reviewMatrix = matrixGenerator(reviewLength)
-print(clusterMerge(reviewMatrix))
+minDist = findMinDist(reviewMatrix)
+print(clusterMerge(minDist))
+
+# gcounter_selection = [[0, 3], [1, 2], [2, 1], [3, 0]]
+
+# value = 3
+# lst = [[0, 3], [1, 2], [2, 1], [3, 0]]
+# items = [x for x in lst if value in x]
+# print(items)
