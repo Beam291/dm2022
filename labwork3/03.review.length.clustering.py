@@ -58,8 +58,15 @@ def pointMerge(minDist : dict, reviewMatrix : dict):
                 if v == vm and km == key:
                     return key, k 
 
-#Merging 
-def merging(reviewDF : pd.DataFrame, minDist)
+#Merging (not my idea)
+def merging(reviewMatrix : dict, minDist : dict, nbComment : int):
+    newvalue = 0
+    for i in pointMerge(minDist, reviewMatrix):
+        newvalue = newvalue + reviewMatrix[i]
+        reviewMatrix.pop(i)
+    reviewMatrix[nbComment-2] = newvalue/2
+    nbComment = nbComment-1
+    return reviewMatrix, nbComment
 
 # def clusterMerge()            
             
@@ -67,7 +74,11 @@ def merging(reviewDF : pd.DataFrame, minDist)
 reviewDF = readFile(10)
 reviewMatrix = matrixGenerator(reviewDF)
 minDist = findMinDist(reviewMatrix)
-pointMerge(minDist, reviewMatrix)
+# reviewMatrix = merging(reviewMatrix, minDist, 10)
+
+print(merging(reviewMatrix, minDist, 10))
+
+# print(reviewMatrix)
 
 # print(clusterMerge(minDist, reviewMatrix))
 
