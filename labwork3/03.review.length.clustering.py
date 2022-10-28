@@ -21,11 +21,24 @@ def readFile(nbComment : int):
 
 def countLength(reviewDF : pd.DataFrame):
     reviewLength = {}
-    for i in (len(reviewDF)):
+    for i in range(len(reviewDF)):
         length = len(reviewDF.iloc[i]['text'])
         reviewLength[i] = length
     return reviewLength
 
+def matrixGenerator(reviewLength : dict): 
+    distMatrix = {}
+    for key, value in reviewLength.items():
+        dist = {}
+        for key1, value1 in reviewLength.items():
+            dist2point = abs(value - value1)
+            dist[key1] = dist2point
+        #remove 0 from dist
+        dist = {x:y for x,y in dist.items() if y!=0}
+        distMatrix[key] = dist
+    return distMatrix
+
 #Program start from here
 reviewDF = readFile(10)
 reviewLength = countLength(reviewDF)
+reviewMatrix = matrixGenerator(reviewLength)

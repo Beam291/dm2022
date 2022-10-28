@@ -27,25 +27,6 @@ def reviewLength(reviewDF : pd.DataFrame):
         length = len(reviewDF.iloc[r]['text'])
         reviewLength.append(length)
     return reviewLength
-
-#create matrix
-def reviewMatrix(reviewLength : list): 
-    distDict = {}
-    for i in reviewLength:
-        distList = []
-        for k in reviewLength:
-            dist2point = abs(k - i)
-            distList.append(dist2point)
-        distDict[reviewLength.index(i)] = distList
-    
-    for key, value in distDict.items():     
-        value : list
-        cluster = {}
-        for v in value:
-            cluster[value.index(v)] = v
-        cluster = {x:y for x,y in cluster.items() if y!=0}
-        distDict[key] = cluster
-    return distDict
         
 #Find minimum
 def reviewMinimum(reviewMatrix : dict):
