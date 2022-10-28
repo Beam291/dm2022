@@ -28,7 +28,8 @@ def countLength(reviewDF : pd.DataFrame):
     return reviewLength
 
 #Calculate the distance between each point then put to a matrix
-def matrixGenerator(reviewLength : dict): 
+def matrixGenerator(reviewDF : pd.DataFrame):
+    reviewLength = countLength(reviewDF) 
     distMatrix = {}
     for key, value in reviewLength.items():
         dist = {}
@@ -44,22 +45,28 @@ def matrixGenerator(reviewLength : dict):
 def findMinDist(reviewMatrix : dict):
     minDist = {}
     for key, value in reviewMatrix.items():
-        tempData = {}
+        value : dict
         lowest = min(value, key = value.get)
-        tempData[lowest] = value[lowest]
-        minDist[key] = tempData
+        minDist[lowest] = value[lowest]
     return minDist
             
-def clusterMerge(minDist : dict):
-    temp = list(minDist.keys())
-    
+#Merging Point
+def pointMerge(minDist : dict, reviewMatrix : dict):
+    for key, value in reviewMatrix.items():
+        for k, v in value.items():
+            for km, vm in minDist.items():
+                if v == vm and km == key:
+                    print(k, key)
+
+# def clusterMerge()            
             
 #Program start from here
 reviewDF = readFile(10)
-reviewLength = countLength(reviewDF)
-reviewMatrix = matrixGenerator(reviewLength)
+reviewMatrix = matrixGenerator(reviewDF)
 minDist = findMinDist(reviewMatrix)
-print(clusterMerge(minDist))
+pointMerge(minDist, reviewMatrix)
+
+# print(clusterMerge(minDist, reviewMatrix))
 
 # gcounter_selection = [[0, 3], [1, 2], [2, 1], [3, 0]]
 
