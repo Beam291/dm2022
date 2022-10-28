@@ -1,4 +1,3 @@
-import Labwork3Function as func
 import itertools
 import pandas as pd
 import json
@@ -19,6 +18,7 @@ def readFile(nbComment : int):
     reviewFile.close()
     return reviewDF
 
+#count the length of reviews from data
 def countLength(reviewDF : pd.DataFrame):
     reviewLength = {}
     for i in range(len(reviewDF)):
@@ -26,6 +26,7 @@ def countLength(reviewDF : pd.DataFrame):
         reviewLength[i] = length
     return reviewLength
 
+#Calculate the distance between each point then put to a matrix
 def matrixGenerator(reviewLength : dict): 
     distMatrix = {}
     for key, value in reviewLength.items():
@@ -38,7 +39,14 @@ def matrixGenerator(reviewLength : dict):
         distMatrix[key] = dist
     return distMatrix
 
+def clusterMerge(reviewMatrix : dict):
+    for key, value in reviewMatrix.items():
+        lowest = min(value, key = value.get)
+        print(lowest, value[lowest])
+            
+
 #Program start from here
 reviewDF = readFile(10)
 reviewLength = countLength(reviewDF)
 reviewMatrix = matrixGenerator(reviewLength)
+print(clusterMerge(reviewMatrix))
