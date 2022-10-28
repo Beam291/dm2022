@@ -53,30 +53,25 @@ def findMinDist(reviewMatrix : dict):
 #Merging Point
 def pointMerge(minDist : dict, reviewMatrix : dict):
     for key, value in reviewMatrix.items():
+        value : dict
         for k, v in value.items():
             for km, vm in minDist.items():
                 if v == vm and km == key:
-                    return key, k 
+                    print(k, key)
+                    return k, key 
 
 #Merging (not my idea)
-def merging(reviewMatrix : dict, minDist : dict, nbComment : int):
-    newvalue = 0
-    for i in pointMerge(minDist, reviewMatrix):
-        newvalue = newvalue + reviewMatrix[i]
-        reviewMatrix.pop(i)
-    reviewMatrix[nbComment-2] = newvalue/2
-    nbComment = nbComment-1
-    return reviewMatrix, nbComment
-
-# def clusterMerge()            
+# def merging(reviewMatrix : dict, minDist : dict):
+#     print(pointMerge(minDist, reviewMatrix))
             
 #Program start from here
 reviewDF = readFile(10)
 reviewMatrix = matrixGenerator(reviewDF)
 minDist = findMinDist(reviewMatrix)
-# reviewMatrix = merging(reviewMatrix, minDist, 10)
-
-print(merging(reviewMatrix, minDist, 10))
+for i in range(10):
+    
+    pointMerge(minDist , reviewMatrix)
+# merging(minDist, reviewMatrix)
 
 # print(reviewMatrix)
 
