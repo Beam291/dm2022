@@ -56,7 +56,10 @@ def pointMerge(minDist : dict, reviewMatrix : dict):
         for k, v in value.items():
             for km, vm in minDist.items():
                 if v == vm and km == key:
-                    print(k, key)
+                    return key, k 
+
+#Merging 
+def merging(reviewDF : pd.DataFrame, minDist)
 
 # def clusterMerge()            
             
