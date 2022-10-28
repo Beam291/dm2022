@@ -58,8 +58,9 @@ def pointMerge(minDist : dict, reviewMatrix : dict):
         for k, v in value.items():
             for km, vm in minDist.items():
                 if v == vm and km == key:
-                    pointMerge.append([key, k])
-    return pointMerge
+                    print(key, k)
+                    # return key, k
+    # return pointMerge
 
 #Merging (not my idea)
 # def merging(reviewMatrix : dict, minDist : dict):
