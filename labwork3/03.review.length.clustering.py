@@ -62,7 +62,7 @@ def pointMerge(reviewMatrix : dict, minDist : dict):
                     return key, k
     # return pointMerge
 
-Merging (not my idea)
+# Merging 
 def merging(reviewMatrix : dict, minDist : dict):
     # print(pointMerge(minDist, reviewMatrix))
     for i in pointMerge(reviewMatrix, minDist):
@@ -74,13 +74,3 @@ reviewMatrix = matrixGenerator(reviewDF)
 minDist = findMinDist(reviewMatrix)
 print(pointMerge(minDist, reviewMatrix))
 
-# print(reviewMatrix)
-
-# print(clusterMerge(minDist, reviewMatrix))
-
-# gcounter_selection = [[0, 3], [1, 2], [2, 1], [3, 0]]
-
-# value = 3
-# lst = [[0, 3], [1, 2], [2, 1], [3, 0]]
-# items = [x for x in lst if value in x]
-# print(items)
