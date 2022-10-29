@@ -2,7 +2,6 @@ import itertools
 from traceback import print_tb
 import pandas as pd
 import json
-import re
 
 #read file and number of comment you want to load in 
 def readFile(nbComment : int):
@@ -29,8 +28,7 @@ def countLength(reviewDF : pd.DataFrame):
     return reviewLength
 
 #Calculate the distance between each point then put to a matrix
-def matrixGenerator(reviewDF : pd.DataFrame):
-    reviewLength = countLength(reviewDF) 
+def matrixGenerator(reviewLength : dict):
     distMatrix = {}
     for key, value in reviewLength.items():
         dist = {}
@@ -61,7 +59,6 @@ def pointMerge(reviewMatrix : dict):
             for km, vm in minDist.items():
                 if v == vm and km == key:
                     tempPointMerge.append([key, k])
-    print(tempPointMerge)
     pointMerge = []
     for lst in tempPointMerge:
         if sorted(lst) not in pointMerge:
@@ -83,27 +80,17 @@ def merging(reviewMatrix : dict, reviewLength : dict, nbComment : int):
     for i in mergeDataList:
         reviewLength[nbComment+1] = i
         nbComment += 1
-    print(reviewLength)
-    # return reviewLength, nbComment
-    # for i in mergeDataList:
-    #     reviewLength
-            # return
-            # mergeData = 0 
-            # if k in reviewLength.keys():
-            #     mergeData = mergeData + reviewLength[k]
-            #     del reviewLength[k]
-            # reviewLength[nbComment + 1] = mergeData/2
-            # nbComment = nbComment + 1
-            # return reviewLength, nbComment
+    return reviewLength, nbComment
         
 #Program start from here
-nbComment = 10
-reviewDF = readFile(nbComment)
-reviewLength = countLength(reviewDF)
-# print(reviewLength)
-# for i in range(nbComment):
-#     reviewMatrix = matrixGenerator(reviewDF)  
-#     reviewLength, nbComment =  merging(reviewMatrix, reviewLength, nbComment)
-#     print(reviewLength)
-reviewMatrix = matrixGenerator(reviewDF)  
-merging(reviewMatrix, reviewLength, nbComment)
+try:
+    nbComment = 10
+    reviewDF = readFile(nbComment)
+    reviewLength = countLength(reviewDF)
+
+    for i in range(nbComment):
+        reviewMatrix = matrixGenerator(reviewLength)
+        reviewLength, nbComment =  merging(reviewMatrix, reviewLength, nbComment)
+        print(reviewLength)
+except:
+    pass
