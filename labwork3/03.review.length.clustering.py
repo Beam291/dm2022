@@ -63,14 +63,25 @@ def pointMerge(reviewMatrix : dict, minDist : dict):
     # return pointMerge
 
 # Merging 
-def merging(reviewMatrix : dict, minDist : dict):
+def merging(reviewMatrix : dict, reviewLength : dict, nbComment : int):
     # print(pointMerge(minDist, reviewMatrix))
-    for i in pointMerge(reviewMatrix, minDist):
+    mergeData = 0
+    for i in pointMerge(reviewMatrix, findMinDist(reviewMatrix)):
+        if i in reviewLength:
+            mergeData = mergeData + reviewLength[i]
+            del reviewLength[i]
+    reviewLength[nbComment + 1] = mergeData/2
+    nbComment = nbComment + 1
+    return reviewLength, nbComment
         
-            
 #Program start from here
-reviewDF = readFile(10)
-reviewMatrix = matrixGenerator(reviewDF)
-minDist = findMinDist(reviewMatrix)
-print(pointMerge(minDist, reviewMatrix))
+nbComment = 10
+reviewDF = readFile(nbComment)
+reviewLength = countLength(reviewDF)
+print(reviewLength)
+# print(reviewLength)
+for i in range(nbComment):
+    reviewMatrix = matrixGenerator(reviewDF)  
+    reviewLength, nbComment =  merging(reviewMatrix, reviewLength, nbComment)
+print(reviewLength)
 
