@@ -53,34 +53,57 @@ def findMinDist(reviewMatrix : dict):
             
 #Merging Point
 def pointMerge(reviewMatrix : dict):
-    pointMerge = []
+    tempPointMerge = []
     minDist = findMinDist(reviewMatrix)
     for key, value in reviewMatrix.items():
         value : dict
         for k, v in value.items():
             for km, vm in minDist.items():
                 if v == vm and km == key:
-                    pointMerge.append([key, k])
+                    tempPointMerge.append([key, k])
+    print(tempPointMerge)
+    pointMerge = []
+    for lst in tempPointMerge:
+        if sorted(lst) not in pointMerge:
+            pointMerge.append(lst)
     return pointMerge
 
 # Merging 
 def merging(reviewMatrix : dict, reviewLength : dict, nbComment : int):
-    mergeData = 0
+    mergeDataList = []
     for i in pointMerge(reviewMatrix):
-        for k in i: 
-            if k in reviewLength:
-                mergeData = mergeData + reviewLength[k]
-                reviewLength.pop(k)
-    reviewLength[nbComment + 1] = mergeData/2
-    nbComment = nbComment + 1
-    return reviewLength, nbComment
+        mergeData = 0
+        for k in i:
+            mergeData += reviewLength[k]
+            del reviewLength[k]
+        # print(reviewLength)
+        mergeData = mergeData/2
+        mergeDataList.append(mergeData)
+    mergeDataList = list(dict.fromkeys(mergeDataList))  
+    for i in mergeDataList:
+        reviewLength[nbComment+1] = i
+        nbComment += 1
+    print(reviewLength)
+    # return reviewLength, nbComment
+    # for i in mergeDataList:
+    #     reviewLength
+            # return
+            # mergeData = 0 
+            # if k in reviewLength.keys():
+            #     mergeData = mergeData + reviewLength[k]
+            #     del reviewLength[k]
+            # reviewLength[nbComment + 1] = mergeData/2
+            # nbComment = nbComment + 1
+            # return reviewLength, nbComment
         
 #Program start from here
 nbComment = 10
 reviewDF = readFile(nbComment)
 reviewLength = countLength(reviewDF)
-
+# print(reviewLength)
+# for i in range(nbComment):
+#     reviewMatrix = matrixGenerator(reviewDF)  
+#     reviewLength, nbComment =  merging(reviewMatrix, reviewLength, nbComment)
+#     print(reviewLength)
 reviewMatrix = matrixGenerator(reviewDF)  
-reviewLength, nbComment =  merging(reviewMatrix, reviewLength, nbComment)
-print(reviewLength)
-
+merging(reviewMatrix, reviewLength, nbComment)

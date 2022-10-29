@@ -19,3 +19,6 @@ def readFile(nbComment : int):
     #Close the open file
     reviewFile.close()
     return reviewDF
+
+# class point:
+#     def shiftMode
