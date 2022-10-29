@@ -2,6 +2,7 @@ import itertools
 from traceback import print_tb
 import pandas as pd
 import json
+import re
 
 #read file and number of comment you want to load in 
 def readFile(nbComment : int):
@@ -51,20 +52,21 @@ def findMinDist(reviewMatrix : dict):
     return minDist
             
 #Merging Point
-def pointMerge(minDist : dict, reviewMatrix : dict):
+def pointMerge(reviewMatrix : dict, minDist : dict):
     pointMerge = []
     for key, value in reviewMatrix.items():
         value : dict
         for k, v in value.items():
             for km, vm in minDist.items():
                 if v == vm and km == key:
-                    print(key, k)
-                    # return key, k
+                    return key, k
     # return pointMerge
 
-#Merging (not my idea)
-# def merging(reviewMatrix : dict, minDist : dict):
-#     print(pointMerge(minDist, reviewMatrix))
+Merging (not my idea)
+def merging(reviewMatrix : dict, minDist : dict):
+    # print(pointMerge(minDist, reviewMatrix))
+    for i in pointMerge(reviewMatrix, minDist):
+        
             
 #Program start from here
 reviewDF = readFile(10)
