@@ -73,7 +73,6 @@ def merging(reviewMatrix : dict, reviewLength : dict, nbComment : int):
         for k in i:
             mergeData += reviewLength[k]
             del reviewLength[k]
-        # print(reviewLength)
         mergeData = mergeData/2
         mergeDataList.append(mergeData)
     mergeDataList = list(dict.fromkeys(mergeDataList))  
