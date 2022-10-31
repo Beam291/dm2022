@@ -1,6 +1,8 @@
 import itertools
+from random import random
 import pandas as pd
 import json
+import random
 
 #read file and number of comment you want to load in 
 def readFile(nbComment : int):
@@ -38,3 +40,14 @@ def matrixGenerator(reviewLength : dict):
         dist = {x:y for x,y in dist.items() if y!=0}
         distMatrix[key] = dist
     return distMatrix
+
+#random centroid 
+def randCentroid(reviewLength : dict):
+    keys = random.sample(reviewLength.keys(), 3)
+    return keys
+    
+#Program start from here
+nbComment = 10
+reviewDF = readFile(nbComment)
+reviewLength = countLength(reviewDF)
+randCenList = randCentroid(reviewLength)
