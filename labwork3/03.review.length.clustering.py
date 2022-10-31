@@ -82,14 +82,14 @@ def merging(reviewMatrix : dict, reviewLength : dict, nbComment : int):
     return reviewLength, nbComment
         
 #Program start from here
-try:
-    nbComment = 10
-    reviewDF = readFile(nbComment)
-    reviewLength = countLength(reviewDF)
+# try:
+nbComment = 10
+reviewDF = readFile(nbComment)
+reviewLength = countLength(reviewDF)
 
-    for i in range(nbComment):
-        reviewMatrix = matrixGenerator(reviewLength)
-        reviewLength, nbComment =  merging(reviewMatrix, reviewLength, nbComment)
-        print(reviewLength)
-except:
-    pass
+while(True):
+    reviewMatrix = matrixGenerator(reviewLength)
+    reviewLength, nbComment =  merging(reviewMatrix, reviewLength, nbComment)
+    if len(reviewLength) == 1:
+        break
+print(reviewLength)
