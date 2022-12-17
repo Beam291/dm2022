@@ -2,7 +2,6 @@ import itertools
 from traceback import print_tb
 import pandas as pd
 import json
-import re
 
 #read file and number of comment you want to load in 
 def readFile(nbComment : int):
@@ -27,11 +26,43 @@ def countLength(reviewDF : pd.DataFrame):
         reviewLength[i] = length
     return reviewLength
 
-def 
+def Average(lst):
+    return sum(lst) / len(lst)
+
+def meanShift(reviewLength : dict, radius : int, mode : list):
+    newModeList = []
+    #Find new mode
+    for i in mode:
+        lengthCen = []
+        for k, v in reviewLength.items():
+            distCal = abs(i - v)
+            if distCal < radius:
+                lengthCen.append(v)
+            else:
+                continue
+        newMode = Average(lengthCen)
+        newMode = float("{:.2f}".format(newMode))
+        newModeList.append(newMode)
+    #find duplicate node
+    newModeList = list(dict.fromkeys(newModeList))
+    return newModeList
 
 #Program start from here
 nbComment = 10
-radius = 400
+radius = 100
+mode = []
 
 reviewDF = readFile(nbComment)
-reviewLength = countLength(reviewDF)   
+reviewLength = countLength(reviewDF)  
+for k, v in reviewLength.items():
+    mode.append(v)
+mode.sort()    
+
+while(True):
+    newModeList = meanShift(reviewLength, radius, mode)
+    if mode != newModeList:
+        mode = newModeList
+        print(mode)
+    else:
+        break
+    

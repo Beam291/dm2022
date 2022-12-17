@@ -67,17 +67,10 @@ def kCluster(reviewLength : dict, randCenList : list):
             v : list
             if lowest == k:
                 v.append(reviewLength[key])
-    print(cluster)
     return cluster
 
 def Average(lst):
     return sum(lst) / len(lst)
-
-def kCentroid(clusterList : dict):
-    tempCen = []
-    for k, v in clusterList.items():
-        tempCen.append(Average(v))
-    return tempCen
         
 #Program start from here
 nbComment = 10
@@ -91,13 +84,12 @@ randCenList = randCentroid(reviewLength, numberOfCentroid)
 # print(randCenList)
 
 while(True):
-    tempCen = []
+    newCen = []
     clusterList = kCluster(reviewLength, randCenList)
-    # print(clusterList)
     for k, v in clusterList.items():
-        tempCen.append(Average(v))
-    if tempCen != randCenList:
-        randCenList = tempCen
+        newCen.append(Average(v))
+    if newCen != randCenList:
+        randCenList = newCen
         print(randCenList)
     else:
         break
