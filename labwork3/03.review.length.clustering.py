@@ -53,16 +53,19 @@ def findMinDist(reviewMatrix : dict):
 def pointMerge(reviewMatrix : dict):
     tempPointMerge = []
     minDist = findMinDist(reviewMatrix)
+    # print(minDist)
     for key, value in reviewMatrix.items():
         value : dict
         for k, v in value.items():
             for km, vm in minDist.items():
                 if v == vm and km == key:
                     tempPointMerge.append([key, k])
+    # print(tempPointMerge)
     pointMerge = []
     for lst in tempPointMerge:
         if sorted(lst) not in pointMerge:
             pointMerge.append(lst)
+    # print(pointMerge)
     return pointMerge
 
 # Merging 
@@ -75,14 +78,14 @@ def merging(reviewMatrix : dict, reviewLength : dict, nbComment : int):
             del reviewLength[k]
         mergeData = mergeData/2
         mergeDataList.append(mergeData)
-    mergeDataList = list(dict.fromkeys(mergeDataList))  
+    # mergeDataList = list(dict.fromkeys(mergeDataList))  
+    # print(mergeDataList)
     for i in mergeDataList:
         reviewLength[nbComment+1] = i
         nbComment += 1
     return reviewLength, nbComment
         
 #Program start from here
-# try:
 nbComment = 10
 reviewDF = readFile(nbComment)
 reviewLength = countLength(reviewDF)
@@ -90,6 +93,7 @@ reviewLength = countLength(reviewDF)
 while(True):
     reviewMatrix = matrixGenerator(reviewLength)
     reviewLength, nbComment =  merging(reviewMatrix, reviewLength, nbComment)
+    print(reviewLength)
     if len(reviewLength) == 1:
         break
-print(reviewLength)
+

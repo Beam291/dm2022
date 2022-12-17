@@ -20,5 +20,18 @@ def readFile(nbComment : int):
     reviewFile.close()
     return reviewDF
 
-# class point:
-#     def shiftMode
+def countLength(reviewDF : pd.DataFrame):
+    reviewLength = {}
+    for i in range(len(reviewDF)):
+        length = len(reviewDF.iloc[i]['text'])
+        reviewLength[i] = length
+    return reviewLength
+
+def 
+
+#Program start from here
+nbComment = 10
+radius = 400
+
+reviewDF = readFile(nbComment)
+reviewLength = countLength(reviewDF)   
